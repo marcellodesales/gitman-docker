@@ -1,19 +1,17 @@
 name: Publish Release Docker Image
 
-on:
-  push:
-    # Sequence of patterns matched against refs/heads
-    branches:    
-      - master         # Push events on master branch
+on: [push]
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
     - name: Publish to Registry
+      # Uses the branch for tag and master for releases https://github.com/marketplace/actions/publish-docker
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
-        name: marcellodesales/gitman:1.7
+        name: marcellodesales/gitman
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
